@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Administrativo</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- Moved styles to external file -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <aside class="sidebar">
+        <div class="logo">
+            <h2>Painel Admin</h2>
+        </div>
+        <nav class="sidebar-nav">
+            <ul>
+                <li><a href="/dashboard"><i class="fas fa-home"></i> Dashboard</a></li>
+                <li><a href="/usuarios"><i class="fas fa-users"></i> Usuários</a></li>
+                <li><a href="/configuracoes"><i class="fas fa-cog"></i> Configurações</a></li>
+                <li><a href="/logout"><i class="fas fa-sign-out-alt"></i> Sair</a></li>
+            </ul>
+        </nav>
+    </aside>
+
+    <div class="content">
+        <header class="top-header">
+            <button class="menu-btn" id="menuToggle" aria-label="Toggle Menu">☰</button>
+            <h1>Dashboard</h1>
+            <div class="user-info">
+                <span>Bem-vindo, <strong>{{ username }}</strong></span>
+            </div>
+        </header>
+
+        <main class="main-content">
+            <section class="cards-section">
+                <div class="cards">
+                    <div class="card users">
+                        <i class="fas fa-users card-icon"></i>
+                        <div class="card-content">
+                            <h3>Usuários</h3>
+                            <p class="card-value">{{ users_count }}</p>
+                        </div>
+                    </div>
+                    <div class="card visits">
+                        <i class="fas fa-chart-line card-icon"></i>
+                        <div class="card-content">
+                            <h3>Visitas</h3>
+                            <p class="card-value">{{ visits_count }}</p>
+                        </div>
+                    </div>
+                    <div class="card sales">
+                        <i class="fas fa-shopping-cart card-icon"></i>
+                        <div class="card-content">
+                            <h3>Vendas</h3>
+                            <p class="card-value">R$ {{ "%.2f"|format(sales_total) }}</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="dashboard-section">
+                <h2>Atividades Recentes</h2>
+                <div class="activity-list">
+                    {% for activity in recent_activities %}
+                    <div class="activity-item">
+                        <i class="fas fa-circle-dot"></i>
+                        <p>{{ activity.description }}</p>
+                        <span class="activity-time">{{ activity.time }}</span>
+                    </div>
+                    {% endfor %}
+                </div>
+            </section>
+        </main>
+
+        <footer class="footer">
+            <p>© {{ current_year }} Dashboard Admin. Todos os direitos reservados.</p>
+        </footer>
+    </div>
+
+    <!-- Moved script to external file -->
+    <script src="scripts.js"></script>
+</body>
+</html>
